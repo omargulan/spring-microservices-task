@@ -13,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @PostMapping
     public User create(@RequestBody User user){

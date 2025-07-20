@@ -8,23 +8,23 @@ services:
     depends_on:
       - users-db
 
-  product-service:
+  products-service:
     build: products/.
     ports:
       - "8082:8082"
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
-      - product-db
+      - products-db
 
-  order-service:
+  orders-service:
     build: orders/.
     ports:
       - "8083:8083"
     environment:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
-      - order-db
+      - orders-db
 
   users-db:
     image: postgres:15-alpine
@@ -33,16 +33,16 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
-  product-db:
+  products-db:
     image: postgres:15-alpine
     environment:
-      POSTGRES_DB: posts
+      POSTGRES_DB: products
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
-  order-db:
+  orders-db:
     image: postgres:15-alpine
     environment:
-      POSTGRES_DB: posts
+      POSTGRES_DB: orders
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
