@@ -11,7 +11,7 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 public class UserController {
     private final RestTemplate restTemplate;
 
-    public UserController(RestTemplateBuilder builder, @Value("http://localhost:8081") String url) {
+    public UserController(RestTemplateBuilder builder, @Value("${users.server.url}") String url) {
         this.restTemplate = builder
                 .uriTemplateHandler(new DefaultUriBuilderFactory(url))
                 .build();
@@ -22,7 +22,7 @@ public class UserController {
         return restTemplate.getForEntity("/users", Object.class);
     }
 
-    @GetMapping
+    @GetMapping("/{userId}")
     public ResponseEntity<Object> findById(@PathVariable long userId) {
         return restTemplate.getForEntity("/users/{userId}", Object.class, userId);
     }

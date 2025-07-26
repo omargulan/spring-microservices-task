@@ -12,7 +12,7 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 public class ProductController {
     private final RestTemplate restTemplate;
 
-    public ProductController(RestTemplateBuilder builder, @Value("http://localhost:8082") String url) {
+    public ProductController(RestTemplateBuilder builder, @Value("${products.server.url}") String url) {
         this.restTemplate = builder
                 .uriTemplateHandler(new DefaultUriBuilderFactory(url))
                 .build();
@@ -23,7 +23,7 @@ public class ProductController {
         return restTemplate.getForEntity("/products", Object.class);
     }
 
-    @GetMapping
+    @GetMapping("/{productId}")
     public ResponseEntity<Object> findById(@PathVariable long productId) {
         return restTemplate.getForEntity("/users/{productId}", Object.class, productId);
     }
